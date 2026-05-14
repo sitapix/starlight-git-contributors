@@ -3,6 +3,10 @@ import { defineConfig } from "astro/config";
 import starlightGitContributors from "starlight-git-contributors";
 
 export default defineConfig({
+	// GitHub Pages serves the docs at https://sitapix.github.io/starlight-git-contributors/.
+	// Without `base`, asset URLs and sidebar links break under the project subpath.
+	site: "https://sitapix.github.io",
+	base: "/starlight-git-contributors",
 	integrations: [
 		starlight({
 			title: "starlight-git-contributors",

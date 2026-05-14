@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: ['+([0-9]).+([0-9]).+([0-9])']
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/starlight-git-contributors
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm --filter starlight-git-contributors test
+
+      - name: Publish
+        run: pnpm --filter starlight-git-contributors publish --no-git-checks --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

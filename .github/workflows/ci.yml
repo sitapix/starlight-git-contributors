@@ -64,19 +64,3 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter starlight-git-contributors test
-
-  docs-build:
-    name: Docs site integration build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter starlight-git-contributors-docs build

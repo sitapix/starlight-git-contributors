@@ -17,6 +17,13 @@ export default defineConfig({
 					"https://github.com/sitapix/starlight-git-contributors/edit/main/docs/",
 			},
 			plugins: [starlightGitContributors()],
+			social: [
+				{
+					icon: "github",
+					label: "GitHub",
+					href: "https://github.com/sitapix/starlight-git-contributors",
+				},
+			],
 			sidebar: [
 				{ label: "Getting started", slug: "index" },
 				{ label: "Demo", slug: "demo" },

@@ -9,7 +9,7 @@ GitHub Actions, GitLab CI, and Bitbucket Pipelines shallow-clone by default, whi
 - **GitLab CI:** set `GIT_DEPTH: 0` in the job or globally.
 - **Bitbucket Pipelines:** `clone: depth: full` in the pipeline definition.
 
-A shallow repo emits one build warning so the cause shows up in your CI logs.
+The plugin logs one build warning when it detects a shallow clone, so the cause shows up in your CI output.
 
 ## Mailmap
 
@@ -20,4 +20,4 @@ Jane Doe <jane@example.com> <jane@oldcompany.com>
 Jane Doe <jane@example.com> <jane@github>
 ```
 
-Aliases collapse to the canonical identity. No config required.
+Git applies these aliases automatically when it reads blame data.

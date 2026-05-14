@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/starlight-git-contributors.svg)](https://www.npmjs.com/package/starlight-git-contributors) [![license](https://img.shields.io/npm/l/starlight-git-contributors.svg)](https://github.com/sitapix/starlight-git-contributors/blob/main/LICENSE)
 
-A [Starlight](https://starlight.astro.build) plugin that lists each page's contributors from local `git blame`. Any host (GitHub, GitLab, Codeberg, Gitea, self-hosted, none). No tokens, no rate limits.
+A [Starlight](https://starlight.astro.build) plugin that lists each page's contributors from local `git blame`. Works on any host (GitHub, GitLab, Codeberg, Gitea, self-hosted, or none) without an API token or rate limit.
 
 ## Install
 
@@ -73,7 +73,7 @@ Renders `<span class="sgc-root">` of comma-separated `<span class="sgc-name">` e
 
 ## CI
 
-Most CI runners shallow-clone, which under-reports authors. One warning fires when detected. Fix:
+Most CI runners shallow-clone, which under-reports authors. The plugin warns once when it sees a shallow clone. Fix:
 
 - **GitHub Actions:** `with: { fetch-depth: 0 }` on `actions/checkout`
 - **GitLab CI:** `GIT_DEPTH: 0`

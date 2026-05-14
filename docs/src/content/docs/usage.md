@@ -27,7 +27,7 @@ starlight({
 
 ## `<PageContributors />` props
 
-For users writing their own Footer.
+Use these props when you ship your own Footer with `overrideFooter: false`.
 
 | Prop        | Type       | Default         | Description                                                                                |
 | ----------- | ---------- | --------------- | ------------------------------------------------------------------------------------------ |
@@ -79,7 +79,7 @@ if (isShallowRepo(process.cwd())) {
 
 ## Failure modes
 
-`git` can fail for a page (no repo, untracked file, missing binary). The component renders nothing and emits one `console.warn` per unique reason. Builds keep running.
+`git` can fail for a page (no repo, untracked file, missing binary). The plugin handles each failure by rendering nothing and writing one `console.warn` per unique reason, so the build still completes.
 
 | Reason (`BlameWarningReason`) | When it fires                                                                       |
 | ----------------------------- | ----------------------------------------------------------------------------------- |
@@ -89,4 +89,4 @@ if (isShallowRepo(process.cwd())) {
 | `blame-failed`                | `git blame` returned non-zero (binary file, internal error)                         |
 | `shallow-repo`                | Repo is a shallow clone, history truncated                                          |
 
-Warnings deduplicate at module scope. One unique problem fires one log line across the whole build.
+A module-scoped set tracks which `(reason, detail)` pairs have already warned, so each unique problem logs once per build no matter how many pages it affects.

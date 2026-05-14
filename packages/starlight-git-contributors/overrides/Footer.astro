@@ -1,0 +1,30 @@
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+import PageContributors from "../components/PageContributors.astro";
+import config from "virtual:starlight-git-contributors/config";
+
+const t = Astro.locals.t;
+const ariaLabel = config.ariaLabel ?? t("starlightGitContributors.ariaLabel");
+---
+
+<Default><slot /></Default>
+
+<p class="sgc-credit">
+  <PageContributors
+    top={config.top}
+    ignore={config.ignore}
+    ariaLabel={ariaLabel}
+  />
+</p>
+
+<style>
+  .sgc-credit {
+    margin: 1.5rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+  .sgc-credit:not(:has(.sgc-root)) {
+    display: none;
+  }
+</style>

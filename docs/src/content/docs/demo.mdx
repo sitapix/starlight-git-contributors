@@ -1,0 +1,66 @@
+---
+title: Demo
+description: Rendering variants and the custom-icon escape hatch.
+---
+
+The credit line at the bottom of this page is the live rendering for whoever authored this source file. Right now that's one person, so the icon is the single-person glyph. The block below shows what two or more contributors look like. The names (`Ada Lovelace`, `Grace Hopper`, `Linus Torvalds`) are hardcoded in this preview, not produced by the component. In a real site the names come from `git blame`.
+
+## Multiple contributors
+
+With two or more contributors, the icon switches to the multi-people variant:
+
+<div>Contributors<br/><span class="sgc-root"><span class="sgc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sgc-name">Ada Lovelace</span>, <span class="sgc-name">Grace Hopper</span>, and <span class="sgc-name">Linus Torvalds</span></span></div>
+
+## Custom icon
+
+The plugin's credit line uses a fixed glyph. For a Starlight `<Icon>`, inline SVG, or any other custom icon, set `overrideFooter: false` and pass markup into the `icon` slot in your own Footer:
+
+```js
+// astro.config.mjs
+starlight({
+  components: { Footer: './src/overrides/Footer.astro' },
+  plugins: [starlightGitContributors({ overrideFooter: false })],
+});
+```
+
+### Starlight `<Icon>`
+
+```astro
+---
+// src/overrides/Footer.astro
+import Default from '@astrojs/starlight/components/Footer.astro';
+import PageContributors from 'starlight-git-contributors/PageContributors.astro';
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<Default><slot /></Default>
+<p>
+  <PageContributors top={5}>
+    <Icon slot="icon" name="user" />
+  </PageContributors>
+</p>
+```
+
+### Inline SVG
+
+```astro
+---
+// src/overrides/Footer.astro
+import Default from '@astrojs/starlight/components/Footer.astro';
+import PageContributors from 'starlight-git-contributors/PageContributors.astro';
+---
+
+<Default><slot /></Default>
+<p>
+  <PageContributors top={5}>
+    <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 2 L2 22 H22 Z" />
+    </svg>
+  </PageContributors>
+</p>
+```
+
+<style>{`
+  .sgc-icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.15em; margin-inline-end: 0.4em; }
+  .sgc-icon svg { width: 100%; height: 100%; }
+`}</style>

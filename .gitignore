@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+.astro/
+.cache/
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS artifacts
+.DS_Store
+._*
+Thumbs.db
+
+# Local dev artifacts (not part of the published plugin or docs site)
+.screenshots/

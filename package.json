@@ -1,0 +1,34 @@
+{
+	"name": "starlight-git-contributors-monorepo",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Monorepo root for starlight-git-contributors.",
+	"type": "module",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"packageManager": "pnpm@10.26.1",
+	"homepage": "https://github.com/sitapix/starlight-git-contributors",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sitapix/starlight-git-contributors.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sitapix/starlight-git-contributors/issues"
+	},
+	"scripts": {
+		"prepare": "node scripts/install-hooks.mjs",
+		"test": "pnpm --filter starlight-git-contributors test",
+		"build:docs": "pnpm --filter starlight-git-contributors-docs build",
+		"dev:docs": "pnpm --filter starlight-git-contributors-docs dev",
+		"typecheck": "node scripts/typecheck.mjs",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check --write .",
+		"check:ci": "biome ci ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.15",
+		"typescript": "^5.6.0"
+	}
+}

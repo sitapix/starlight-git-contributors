@@ -1,0 +1,16 @@
+{
+	"name": "starlight-git-contributors-docs",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"@astrojs/starlight": "^0.39.0",
+		"astro": "^6.0.0",
+		"starlight-git-contributors": "workspace:*"
+	}
+}

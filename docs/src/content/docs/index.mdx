@@ -1,0 +1,35 @@
+---
+title: starlight-git-contributors
+description: Per-page contributor lists for Starlight, built from local git blame.
+---
+
+A [Starlight](https://starlight.astro.build) plugin that lists each page's contributors from local `git blame`. Works with GitHub, GitLab, Codeberg, Gitea, self-hosted, or no remote. No tokens, no rate limits.
+
+Every page on this site renders its own credit line at the bottom of the footer. The [Demo](/demo/) page shows the rendering variants up close.
+
+## Install
+
+```sh
+npm install starlight-git-contributors
+```
+
+## Wire up
+
+Add the plugin to `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import starlightGitContributors from 'starlight-git-contributors';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Docs',
+      plugins: [starlightGitContributors()],
+    }),
+  ],
+});
+```
+
+That's the whole setup. The plugin handles the Footer wiring. Every page now shows a credit line below its pagination cards.
